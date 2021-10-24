@@ -28,8 +28,20 @@ const Card = ({
   //     )
   //   );
   // };
-  const addToCart = () => {
-    addItem(product, setRedirect(false));
+  const addToCart = (productId) => (event) => {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    if (typeof window !== "undefined") {
+      cart.forEach((data) => {
+        if (data._id === productId) {
+          setRun(!run);
+          updateItem(productId, data.count + 1);
+        } else {
+          addItem(product, setRedirect(false));
+        }
+      });
+    } else {
+      addItem(product, setRedirect(true));
+    }
   };
 
   const shouldRedirect = (redirect) => {
@@ -43,7 +55,7 @@ const Card = ({
       return (
         showAddToCartButton && (
           <button
-            onClick={addToCart}
+            onClick={addToCart(product._id)}
             className="btn btn-outline-success rounded  mt-2"
           >
             <Cart />

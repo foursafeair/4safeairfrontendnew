@@ -4,7 +4,7 @@ import "../styles.css";
 
 const Layout = ({ className, children }) => (
   <div>
-    <Menu />
+    {/* <Menu /> */}
     <div className="jumbotron"></div>
     <div className={className}>{children}</div>
   </div>

@@ -7,6 +7,7 @@ import Footer from "./Footer";
 const Product = (props) => {
   const [product, setProduct] = useState({});
   const [error, setError] = useState(false);
+  const [filters, setFilter] = useState(false);
 
   const loadSingleProduct = (productId) => {
     read(productId).then((data) => {
@@ -14,14 +15,39 @@ const Product = (props) => {
         setError(data.error);
       } else {
         setProduct(data);
-        listRelated(data._id).then((data) => {
-          if (data.error) {
-            setError(error);
-          } 
-        });
+        if (data.category.name === "Filter") {
+          setFilter(true);
+        }
+        // listRelated(data._id).then((data) => {
+        //   if (data.error) {
+        //     setError(error);
+        //   }
+        // });
       }
     });
   };
+  const showTechInfo = () => (
+    <div style={{ display: filters ? "none" : "" }}>
+      <h2 className="mt-4 mb-4 text-center">Teknisk Beskrivning</h2>
+
+      <p className="text-center">Färg: {product.color}</p>
+      <p className="text-center">Produktdimension: {product.dimension}</p>
+      <p className="text-center">Chassimaterial: {product.material}</p>
+      <p className="text-center">Vikt: {product.weight}</p>
+      <p className="text-center">Spänning: {product.voltage}</p>
+      <p className="text-center">
+        Energiförbrukning: {product.powerConsumption}
+      </p>
+      <p className="text-center">CADR: {product.cadr}</p>
+      <p className="text-center">Applikationsområde: {product.area}</p>
+      <p className="text-center">Ljud: {product.noice}</p>
+      <p className="text-center">PM2.5​: {product.pm25}</p>
+      <p className="text-center">Filter: {product.filter}</p>
+      <p className="text-center">Sensor: {product.sensor}</p>
+      <p className="text-center">Driftstyrning: {product.controllers}</p>
+      <p className="text-center">Certifiering: {product.certification}</p>
+    </div>
+  );
 
   useEffect(() => {
     const productId = props.match.params.productId;
@@ -53,25 +79,10 @@ const Product = (props) => {
       </div>
       <div className="divider"></div>
       <h2 className="mt-4 mb-4 text-center">Produktbeskrivning</h2>
-      
+
       <p className="text-center">{product.description}</p>
       <div className="divider"></div>
-      <h2 className="mt-4 mb-4 text-center">Teknisk Beskrivning</h2>
-      
-      <p className="text-center">Färg: {product.color}</p>
-      <p className="text-center">Produktdimension: {product.dimension}</p>
-      <p className="text-center">Chassimaterial: {product.material}</p>
-      <p className="text-center">Vikt: {product.weight}</p>
-      <p className="text-center">Spänning: {product.voltage}</p>
-      <p className="text-center">Energiförbrukning: {product.powerConsumption}</p>
-      <p className="text-center">CADR: {product.cadr}</p>
-      <p className="text-center">Applikationsområde: {product.area}</p>
-      <p className="text-center">Ljud: {product.noice}</p>
-      <p className="text-center">PM2.5​: {product.pm25}</p>
-      <p className="text-center">Filter: {product.filter}</p>
-      <p className="text-center">Sensor: {product.sensor}</p>
-      <p className="text-center">Driftstyrning: {product.controllers}</p>
-      <p className="text-center">Certifiering: {product.certification}</p>
+      {showTechInfo()}
       <Footer></Footer>
     </Layout>
   );

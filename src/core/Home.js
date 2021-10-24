@@ -4,6 +4,7 @@ import Card from "./Card";
 import Footer from "./Footer";
 import Menu from "./Menu";
 import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [productsByArrival, setproductsByArrival] = useState([]);
@@ -25,7 +26,7 @@ const Home = () => {
 
   return (
     <div>
-      <Menu></Menu>
+      {/* <Menu></Menu> */}
       <div className="mt-1">
         <img
           className="rounded mx-auto d-block img-fluid"
@@ -42,7 +43,13 @@ const Home = () => {
               <Card product={product} />
             </div>
           ))}
-         <Nav.Link className="text-center" style={{color: "black"}} href="/products">Alla Produkter</Nav.Link>
+          <Nav.Link
+            className="text-center"
+            style={{ color: "black" }}
+            href="/products"
+          >
+            Alla Produkter
+          </Nav.Link>
         </div>
       </div>
       <div className="divider"></div>
@@ -56,6 +63,8 @@ const Home = () => {
         Det finns även andra s.k nya tekniker men de bygger på en icke bevisad
         effekt samt kan avge sekundära effekter som är till och med cancerogena
         som skadar oss människor.
+        <br />
+        <Link to={"/cleanAir"}> Läs mer här </Link>
       </p>
       <Footer></Footer>
     </div>

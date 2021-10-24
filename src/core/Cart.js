@@ -13,7 +13,7 @@ const Cart = () => {
   useEffect(() => {
     setItems(getCart());
   }, [run]);
- 
+
   const getTotalAmount = () => {
     return items.reduce((currentValue, nextValue) => {
       return parseInt(currentValue + +nextValue.count);
@@ -35,7 +35,7 @@ const Cart = () => {
             setRun={setRun}
             run={run}
           />
-          ))}
+        ))}
       </div>
     );
   };
@@ -55,13 +55,12 @@ const Cart = () => {
       <div className="row">
         <div className="col-12">
           {items.length > 0 ? showItems(items) : noItemsMessage()}
-
         </div>
-       {/* <div className="col-6"> */}
-          <h2 className="mb-4">Summering av Kundvagn</h2>
-          <hr />
-          <Checkout products={items} setRun={setRun} run={run} />
-        </div> 
+        {/* <div className="col-6"> */}
+        <h2 className="mb-4">Summering av Kundvagn {}</h2>
+        <hr />
+        {/* <Checkout products={items} setRun={setRun} run={run} /> */}
+      </div>
       {/* </div> */}
     </Layout>
   );
